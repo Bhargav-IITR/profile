@@ -1,0 +1,418 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #0a0a0a;
+  --foreground: #f5f7fb;
+  --bmw-blue: #0066cc;
+  --f1-red: #e8002d;
+  --chevy-gold: #d4af37;
+  --glass-bg: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --mouse-x: 50vw;
+  --mouse-y: 50vh;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background:
+    linear-gradient(180deg, rgba(0, 102, 204, 0.08) 0%, rgba(10, 10, 10, 0) 18%),
+    var(--background);
+  color: var(--foreground);
+}
+
+body::before {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 72px 72px;
+  content: "";
+  pointer-events: none;
+}
+
+::selection {
+  background: rgba(0, 102, 204, 0.3);
+  color: #ffffff;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--bmw-blue) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 4px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--bmw-blue);
+  border-radius: 9999px;
+}
+
+@layer components {
+  .section-shell {
+    @apply mx-auto w-full max-w-7xl px-6 sm:px-8;
+  }
+
+  .glass-card {
+    @apply border border-white/10 bg-white/[0.03] shadow-glass backdrop-blur-sm;
+  }
+
+  .carbon-panel {
+    background-image:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%),
+      repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.06) 0 2px,
+        transparent 2px 8px,
+        rgba(255, 255, 255, 0.02) 8px 10px,
+        transparent 10px 16px
+      );
+    background-color: rgba(8, 8, 8, 0.9);
+  }
+
+  .section-divider {
+    @apply mx-auto h-px w-[min(92vw,1280px)] bg-racing-stripe opacity-80;
+  }
+
+  .nav-link {
+    @apply relative inline-flex items-center py-2 text-sm font-medium tracking-[0.18em] text-white/70 transition-colors duration-300 hover:text-bmw-blue;
+  }
+
+  .nav-link::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    transform: scaleX(0);
+    transform-origin: left;
+    background: currentColor;
+    transition: transform 0.3s ease;
+    content: "";
+  }
+
+  .nav-link:hover::after,
+  .nav-link[data-active="true"]::after {
+    transform: scaleX(1);
+  }
+
+  .nav-link[data-active="true"] {
+    @apply text-bmw-blue;
+  }
+
+  .section-kicker {
+    @apply font-mono text-xs uppercase tracking-[0.3em] text-white/45;
+  }
+
+  .action-button {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold tracking-[0.18em] transition-all duration-300;
+  }
+
+  .action-button-outline {
+    @apply border border-bmw-blue text-bmw-blue hover:bg-bmw-blue hover:text-white;
+  }
+
+  .action-button-solid {
+    @apply border border-f1-red bg-f1-red text-white hover:brightness-110;
+  }
+
+  .stat-chip {
+    @apply rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-white/80 backdrop-blur-sm;
+  }
+
+  .skill-pill {
+    @apply rounded-full border bg-black/50 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-white/90;
+  }
+
+  .project-link {
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-black/30 text-white/70 transition-all duration-300 hover:border-white/20 hover:text-white;
+  }
+
+  .project-link-disabled {
+    @apply border-white/5 bg-black/20 text-white/25;
+  }
+}
+
+.aurora-background {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  opacity: 0.18;
+  filter: blur(80px);
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+.aurora-blob--1 {
+  top: -12%;
+  left: -8%;
+  width: 680px;
+  height: 680px;
+  background: #0066cc;
+}
+
+.aurora-blob--2 {
+  right: -12%;
+  bottom: -18%;
+  width: 620px;
+  height: 620px;
+  background: #e8002d;
+}
+
+.aurora-blob--3 {
+  bottom: -16%;
+  left: -10%;
+  width: 520px;
+  height: 520px;
+  background: #d4af37;
+}
+
+.aurora-blob--4 {
+  top: 28%;
+  right: 8%;
+  width: 300px;
+  height: 300px;
+  background: #0066cc;
+}
+
+.aurora-blob--1.is-idle {
+  animation: auroraDriftOne 16s ease-in-out infinite;
+}
+
+.aurora-blob--2.is-idle {
+  animation: auroraDriftTwo 19s ease-in-out infinite;
+}
+
+.aurora-blob--3.is-idle {
+  animation: auroraDriftThree 14s ease-in-out infinite;
+}
+
+.aurora-blob--4.is-idle {
+  animation: auroraDriftFour 12s ease-in-out infinite;
+}
+
+.aurora-spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    600px circle at var(--mouse-x) var(--mouse-y),
+    rgba(0, 102, 204, 0.06),
+    transparent 40%
+  );
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  height: 32px;
+  width: 32px;
+  border: 1px solid rgba(0, 102, 204, 0.85);
+  border-radius: 9999px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%);
+  transition: opacity 0.2s ease;
+  mix-blend-mode: screen;
+}
+
+.custom-cursor.is-visible {
+  opacity: 0.75;
+}
+
+.custom-cursor::before {
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(232, 0, 45, 0.55);
+  border-radius: inherit;
+  content: "";
+}
+
+.custom-cursor__tick {
+  position: absolute;
+  background: rgba(212, 175, 55, 0.9);
+}
+
+.custom-cursor__tick--top,
+.custom-cursor__tick--bottom {
+  left: 50%;
+  height: 6px;
+  width: 1px;
+  transform: translateX(-50%);
+}
+
+.custom-cursor__tick--top {
+  top: -5px;
+}
+
+.custom-cursor__tick--bottom {
+  bottom: -5px;
+}
+
+.custom-cursor__tick--left,
+.custom-cursor__tick--right {
+  top: 50%;
+  height: 1px;
+  width: 6px;
+  transform: translateY(-50%);
+}
+
+.custom-cursor__tick--left {
+  left: -5px;
+}
+
+.custom-cursor__tick--right {
+  right: -5px;
+}
+
+.typewriter-cursor {
+  display: inline-block;
+  width: 1px;
+  height: 1.1em;
+  margin-left: 0.2rem;
+  background: currentColor;
+  vertical-align: -0.16em;
+  animation: cursorBlink 1s step-end infinite;
+}
+
+.marquee-shell {
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  min-width: 200%;
+  animation: marquee 30s linear infinite;
+}
+
+.ecu-live-dot {
+  height: 7px;
+  width: 7px;
+  border-radius: 9999px;
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34, 197, 94, 0.75);
+  animation: ecuLivePulse 1s ease-in-out infinite;
+}
+
+.ecu-dot-leader {
+  background-image: radial-gradient(circle, rgba(255, 255, 255, 0.28) 1px, transparent 1.2px);
+  background-position: center;
+  background-repeat: repeat-x;
+  background-size: 8px 2px;
+}
+
+@keyframes ecuLivePulse {
+  0%,
+  100% {
+    opacity: 0.45;
+    transform: scale(0.95);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes auroraDriftOne {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate3d(22px, -16px, 0);
+  }
+
+  50% {
+    transform: translate3d(6px, 24px, 0);
+  }
+
+  75% {
+    transform: translate3d(-18px, -10px, 0);
+  }
+}
+
+@keyframes auroraDriftTwo {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate3d(-20px, 18px, 0);
+  }
+
+  50% {
+    transform: translate3d(14px, -20px, 0);
+  }
+
+  75% {
+    transform: translate3d(24px, 10px, 0);
+  }
+}
+
+@keyframes auroraDriftThree {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate3d(16px, 20px, 0);
+  }
+
+  50% {
+    transform: translate3d(-14px, -18px, 0);
+  }
+
+  75% {
+    transform: translate3d(10px, -8px, 0);
+  }
+}
+
+@keyframes auroraDriftFour {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  25% {
+    transform: translate3d(18px, -10px, 0);
+  }
+
+  50% {
+    transform: translate3d(-10px, 14px, 0);
+  }
+
+  75% {
+    transform: translate3d(12px, 20px, 0);
+  }
+}
