@@ -115,27 +115,38 @@ export const projects = [
     live: null,
   },
   {
-    name: "RideRadar",
+    name: "VLG Stable Diffusion",
     accent: "#E8002D",
     description:
-      "Cross-platform cab fare comparison mobile app aggregating real-time pricing from Uber and Ola, helping users instantly pick the cheapest ride option.",
-    tech: ["React Native", "Node.js", "REST APIs"],
-    github: null,
+      "Implemented and experimented with Stable Diffusion generative models and Vision Transformers for image generation and vision tasks. The project demonstrates hands-on experience with cutting-edge deep learning architectures through Jupyter notebook-based explorations and practical implementations.",
+    tech: ["Python", "ViT", "Stable Diffusion", "PyTorch"],
+    github: "https://github.com/Bhargav-IITR/VLG---PROJECT--STABLE-DIFFUSION",
     live: null,
   },
   {
-    name: "Voice Note Extension",
+    name: "GUI for Bullet Train Data Analysis",
     accent: "#D4AF37",
     description:
-      "Chrome extension using Web Speech API and Chrome Side Panel for voice-to-text note capture with Google Docs persistence via OAuth.",
+      "Developed a Python-based GUI using PyQt5 for real-time visualization and analysis of experimental data, significantly improving processing efficiency. Integrated Octave scripts via Oct2py for advanced computations, and built robust data logging and export features for seamless result sharing. Ensured application stability through thorough testing and debugging. This project was in collaboration with IIT Roorkee and NHSRCL",
     tech: [
-      "JavaScript",
-      "Chrome Extension APIs",
-      "Web Speech API",
-      "Google OAuth",
-      "Google Docs API",
+      "Python",
+      "Oct2Py",
+      "Streamlit"
     ],
-    github: null,
+    github: "https://github.com/Bhargav-IITR/GUI_BulletTrain",
+    live: null,
+  },
+  {
+    name: "Personal portfolio website",
+    accent: "#D4AF37",
+    description:
+      "Built a personal portfolio website using Next.js and React, showcasing projects, experience, and skills with a sleek, modern design. Implemented responsive layouts, interactive components, and optimized performance for fast load times. Deployed on Vercel with continuous integration for seamless updates.",
+    tech: [
+      "Next.js",
+      "React",
+      "TypeScript"
+    ],
+    github: "https://github.com/Bhargav-IITR/profile",
     live: null,
   },
 ] as const;
@@ -161,7 +172,7 @@ export const skillCategories = [
   },
   {
     title: "LANGUAGES",
-    skills: ["Java", "C++", "Python", "JavaScript", "TypeScript"],
+    skills: ["Java", "C++", "Python", "JavaScript", "TypeScript", "SQL"],
   },
   {
     title: "AI / ML INTEGRATION",
@@ -178,6 +189,13 @@ export const skillCategories = [
       "Microsoft OAuth",
       "RBAC",
       "AES-256 Encryption",
+    ],
+  },
+    {
+    title: "Frontend",
+    skills: [
+      "AngularJS",
+      "Next.js"
     ],
   },
 ] as const;

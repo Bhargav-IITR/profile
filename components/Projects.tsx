@@ -18,9 +18,12 @@ export function Projects() {
             <SectionHeader title="THE GARAGE" subtitle="Projects I've Built" />
           </RevealItem>
 
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="flex flex-wrap justify-center gap-6">
             {projects.map((project) => (
-              <RevealItem key={project.name}>
+              <RevealItem
+                key={project.name}
+                className="w-full md:w-[calc(50%-12px)] xl:w-[calc(33.333%-16px)] flex justify-center"
+              >
                 <article
                   className="carbon-panel glass-card group h-full rounded-[28px] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--accent)] hover:[box-shadow:0_22px_48px_-28px_var(--accent)]"
                   style={{ "--accent": project.accent } as CSSProperties}

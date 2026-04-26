@@ -53,7 +53,7 @@ export function Hero() {
                   View Garage
                 </Link>
                 <a
-                  href="/resume.pdf"
+                  href="https://drive.google.com/file/d/1oPVyP5AWeEKny4kVA286-XQ5KDUFiHFa/view?usp=sharing"
                   className="action-button action-button-solid"
                   target="_blank"
                   rel="noreferrer"
