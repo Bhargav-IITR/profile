@@ -9,7 +9,18 @@ import { RevealItem, StaggerGroup } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 import { cn } from "@/lib/utils";
 
+type ProjectItem = {
+  name: string;
+  accent: string;
+  description: string;
+  tech: readonly string[];
+  github: string | null;
+  live: string | null;
+};
+
 export function Projects() {
+  const projectItems: readonly ProjectItem[] = projects;
+
   return (
     <section id="projects" className="scroll-mt-24 py-24 sm:py-28">
       <div className="section-shell">
@@ -19,7 +30,7 @@ export function Projects() {
           </RevealItem>
 
           <div className="flex flex-wrap justify-center gap-6">
-            {projects.map((project) => (
+            {projectItems.map((project) => (
               <RevealItem
                 key={project.name}
                 className="w-full md:w-[calc(50%-12px)] xl:w-[calc(33.333%-16px)] flex justify-center"
