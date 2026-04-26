@@ -27,15 +27,26 @@ export function Contact() {
           <div className="grid gap-5 md:grid-cols-3">
             {contactCards.map((card) => {
               const Icon = contactIcons[card.label];
+              const href =
+                card.label === "Email"
+                  ? `mailto:${card.value}?subject=${encodeURIComponent("Let's connect")}`
+                  : card.href;
+              const isEmailCard = card.label === "Email";
 
               return (
                 <RevealItem key={card.label}>
                   <a
                     id={card.label === "GitHub" ? "contact-github" : undefined}
-                    href={card.href}
-                    target={card.label === "Email" ? undefined : "_blank"}
-                    rel={card.label === "Email" ? undefined : "noreferrer"}
-                    className="scroll-mt-28 glass-card flex h-full flex-col items-center gap-4 rounded-[28px] px-6 py-8 text-center transition-all duration-300 hover:border-bmw-blue/60 hover:[box-shadow:0_18px_42px_-30px_rgba(0,102,204,0.75)]"
+                    href={href}
+                    target={isEmailCard ? undefined : "_blank"}
+                    rel={isEmailCard ? undefined : "noreferrer"}
+                    aria-label={
+                      isEmailCard
+                        ? `Send an email to ${card.value}`
+                        : `Open ${card.label}`
+                    }
+                    title={isEmailCard ? `Send an email to ${card.value}` : card.label}
+                    className="scroll-mt-28 glass-card flex h-full cursor-pointer flex-col items-center gap-4 rounded-[28px] px-6 py-8 text-center transition-all duration-300 hover:border-bmw-blue/60 hover:[box-shadow:0_18px_42px_-30px_rgba(0,102,204,0.75)]"
                   >
                     <span className="inline-flex h-14 w-14 items-center justify-center rounded-full border border-white/10 bg-black/30 text-bmw-blue">
                       <Icon size={24} />

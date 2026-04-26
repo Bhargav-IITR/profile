@@ -168,7 +168,8 @@ body::before {
   transition:
     transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.3s ease;
+    border-color 0.3s ease,
+    background-color 0.3s ease;
   transform: translate3d(0, 0, 0) scale(1);
   will-change: transform, box-shadow;
 }
@@ -180,11 +181,13 @@ body::before {
 
 .skill-float-shell:hover .skill-float-card,
 .skill-float-shell:focus-within .skill-float-card {
+  border-color: rgb(var(--skill-accent-rgb, 0 102 204) / 0.42);
+  background-color: rgb(var(--skill-accent-rgb, 0 102 204) / 0.05);
   transform: translate3d(0, 0, 0) scale(1.04);
   box-shadow:
     0 24px 54px rgba(0, 0, 0, 0.42),
-    0 0 0 1px rgba(255, 255, 255, 0.04),
-    0 0 28px rgba(0, 102, 204, 0.1);
+    0 0 0 1px rgb(var(--skill-accent-rgb, 0 102 204) / 0.22),
+    0 0 36px rgb(var(--skill-accent-rgb, 0 102 204) / 0.18);
 }
 
 .skill-float--northwest {
@@ -279,30 +282,30 @@ body::before {
 .aurora-spotlight {
   position: absolute;
   inset: 0;
-  opacity: 0.95;
+  opacity: 0.78;
   mix-blend-mode: screen;
-  filter: blur(16px);
+  filter: blur(12px);
   background:
     radial-gradient(
       140px circle at var(--mouse-x) var(--mouse-y),
-      rgba(255, 255, 255, 0.26),
-      rgba(255, 255, 255, 0.12) 28%,
+      rgba(255, 255, 255, 0.18),
+      rgba(255, 255, 255, 0.08) 28%,
       transparent 68%
     ),
     radial-gradient(
       320px circle at var(--mouse-x) var(--mouse-y),
-      rgba(0, 102, 204, 0.26),
-      rgba(0, 102, 204, 0.14) 36%,
+      rgba(0, 102, 204, 0.18),
+      rgba(0, 102, 204, 0.1) 36%,
       transparent 70%
     ),
     radial-gradient(
       520px circle at calc(var(--mouse-x) + 18px) calc(var(--mouse-y) - 12px),
-      rgba(232, 0, 45, 0.17),
+      rgba(232, 0, 45, 0.11),
       transparent 64%
     ),
     radial-gradient(
       700px circle at calc(var(--mouse-x) - 20px) calc(var(--mouse-y) + 14px),
-      rgba(212, 175, 55, 0.14),
+      rgba(212, 175, 55, 0.09),
       transparent 72%
     );
 }

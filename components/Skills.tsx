@@ -4,6 +4,15 @@ import { RevealItem, StaggerGroup } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 
 const palette = ["#0066CC", "#E8002D", "#D4AF37"];
+const skillCardAccents = [
+  { hex: "#2563EB", rgb: "37 99 235" },
+  { hex: "#DC2626", rgb: "220 38 38" },
+  { hex: "#D97706", rgb: "217 119 6" },
+  { hex: "#0F766E", rgb: "15 118 110" },
+  { hex: "#475569", rgb: "71 85 105" },
+  { hex: "#15803D", rgb: "21 128 61" },
+  { hex: "#1D4ED8", rgb: "29 78 216" },
+] as const;
 const floatPresets = [
   { animationClass: "skill-float--northwest", duration: "8.6s",  delay: "-1.8s" },
   { animationClass: "skill-float--southeast", duration: "11.2s", delay: "-4.1s" },
@@ -33,10 +42,18 @@ interface CardProps {
 
 function SkillCard({ category, categoryIndex }: CardProps) {
   const preset = floatPresets[categoryIndex % floatPresets.length];
+  const accent = skillCardAccents[categoryIndex % skillCardAccents.length];
   return (
     <div
       className={`skill-float-shell ${preset.animationClass}`}
-      style={{ "--float-duration": preset.duration, "--float-delay": preset.delay } as CSSProperties}
+      style={
+        {
+          "--float-duration": preset.duration,
+          "--float-delay": preset.delay,
+          "--skill-accent": accent.hex,
+          "--skill-accent-rgb": accent.rgb,
+        } as CSSProperties
+      }
     >
       <article className="skill-float-card carbon-panel glass-card h-full rounded-[28px] p-5">
         <div className="mb-4">

@@ -214,6 +214,6 @@ export const contactCards = [
   {
     label: "LinkedIn",
     value: "linkedin.com/in/bhargav-pratim-nath",
-    href: "https://linkedin.com/in/bhargav-pratim-nath",
+    href: "https://www.linkedin.com/in/bhargav-pratim-nath-425b9a184/",
   },
 ] as const;
