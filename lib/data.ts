@@ -50,7 +50,7 @@ export const aboutStats = [
   { label: "SEASON", value: "2025-PRESENT" },
   { label: "DEGREE", value: "IIT Roorkee EE" },
   { label: "CGPA", value: "8.63 / 10" },
-  { label: "GITHUB", value: "Bhargav-IITR" },
+  { label: "GITHUB", value: "Bhargav-IITR", href: "#contact-github" },
 ];
 
 export const experienceEntries = [

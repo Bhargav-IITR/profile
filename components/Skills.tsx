@@ -1,8 +1,17 @@
+import type { CSSProperties } from "react";
 import { skillCategories } from "@/lib/data";
 import { RevealItem, StaggerGroup } from "@/components/Reveal";
 import { SectionHeader } from "@/components/SectionHeader";
 
 const palette = ["#0066CC", "#E8002D", "#D4AF37"];
+const floatPresets = [
+  { animationClass: "skill-float--northwest", duration: "8.6s", delay: "-1.8s" },
+  { animationClass: "skill-float--southeast", duration: "11.2s", delay: "-4.1s" },
+  { animationClass: "skill-float--orbit", duration: "10.4s", delay: "-2.6s" },
+  { animationClass: "skill-float--rise", duration: "9.4s", delay: "-5.2s" },
+  { animationClass: "skill-float--glide", duration: "12.1s", delay: "-3.4s" },
+  { animationClass: "skill-float--drift", duration: "10.8s", delay: "-6.1s" },
+] as const;
 
 export function Skills() {
   return (
@@ -14,35 +23,52 @@ export function Skills() {
           </RevealItem>
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {skillCategories.map((category) => (
-              <RevealItem key={category.title}>
-                <article className="carbon-panel glass-card rounded-[28px] p-6 sm:p-7">
-                  <div className="mb-6">
-                    <p className="section-kicker">System Group</p>
-                    <h3 className="mt-2 font-display text-2xl uppercase tracking-[0.12em] text-white">
-                      {category.title}
-                    </h3>
-                  </div>
+            {skillCategories.map((category, categoryIndex) => {
+              const preset = floatPresets[categoryIndex % floatPresets.length];
 
-                  <StaggerGroup className="flex flex-wrap gap-2.5" amount={0.45} stagger={0.06}>
-                    {category.skills.map((skill, index) => (
-                      <RevealItem key={skill} distance={20}>
-                        <span
-                          className="skill-pill inline-flex"
-                          style={{ borderColor: `${palette[index % palette.length]}CC` }}
-                        >
-                          {skill}
-                        </span>
-                      </RevealItem>
-                    ))}
-                  </StaggerGroup>
-                </article>
-              </RevealItem>
-            ))}
+              return (
+                <RevealItem key={category.title}>
+                  <div
+                    className={`skill-float-shell ${preset.animationClass}`}
+                    style={
+                      {
+                        "--float-duration": preset.duration,
+                        "--float-delay": preset.delay,
+                      } as CSSProperties
+                    }
+                  >
+                    <article className="skill-float-card carbon-panel glass-card h-full rounded-[28px] p-6 sm:p-7">
+                      <div className="mb-6">
+                        <p className="section-kicker">System Group</p>
+                        <h3 className="mt-2 font-display text-2xl uppercase tracking-[0.12em] text-white">
+                          {category.title}
+                        </h3>
+                      </div>
+
+                      <StaggerGroup
+                        className="flex flex-wrap gap-2.5"
+                        amount={0.45}
+                        stagger={0.06}
+                      >
+                        {category.skills.map((skill, index) => (
+                          <RevealItem key={skill} distance={20}>
+                            <span
+                              className="skill-pill inline-flex"
+                              style={{ borderColor: `${palette[index % palette.length]}CC` }}
+                            >
+                              {skill}
+                            </span>
+                          </RevealItem>
+                        ))}
+                      </StaggerGroup>
+                    </article>
+                  </div>
+                </RevealItem>
+              );
+            })}
           </div>
         </StaggerGroup>
       </div>
     </section>
   );
 }
-

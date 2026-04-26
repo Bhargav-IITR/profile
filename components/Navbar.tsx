@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useSpring, useTransform } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IconMenu2, IconX } from "@tabler/icons-react";
@@ -9,6 +9,20 @@ import { cn } from "@/lib/utils";
 
 function Tachometer() {
   const [isRevved, setIsRevved] = useState(false);
+  const needleAngle = useSpring(-145, { stiffness: 180, damping: 16 });
+  const needleRadius = 21;
+  const needleX = useTransform(
+    needleAngle,
+    (angle) => 37 + needleRadius * Math.cos((angle * Math.PI) / 180),
+  );
+  const needleY = useTransform(
+    needleAngle,
+    (angle) => 32 + needleRadius * Math.sin((angle * Math.PI) / 180),
+  );
+
+  useEffect(() => {
+    needleAngle.set(isRevved ? -35 : -145);
+  }, [isRevved, needleAngle]);
 
   return (
     <button
@@ -32,22 +46,16 @@ function Tachometer() {
           strokeDasharray="6 6"
           strokeLinecap="round"
         />
+        <motion.line
+          x1="37"
+          y1="32"
+          x2={needleX}
+          y2={needleY}
+          stroke="#E8002D"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+        />
         <circle cx="37" cy="32" r="3" fill="#FFFFFF" />
-        <motion.g
-          animate={{ rotate: isRevved ? 150 : 0 }}
-          transition={{ type: "spring", stiffness: 180, damping: 16 }}
-          style={{ transformOrigin: "37px 32px" }}
-        >
-          <line
-            x1="37"
-            y1="32"
-            x2="18"
-            y2="18"
-            stroke="#E8002D"
-            strokeWidth="2.5"
-            strokeLinecap="round"
-          />
-        </motion.g>
         <defs>
           <linearGradient id="tach-gradient" x1="10" y1="32" x2="64" y2="32">
             <stop stopColor="#0066CC" />
@@ -176,4 +184,3 @@ export function Navbar() {
     </header>
   );
 }
-

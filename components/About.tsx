@@ -39,16 +39,34 @@ export function About() {
                   </div>
 
                   <div className="space-y-3">
-                    {aboutStats.map((stat) => (
-                      <div
-                        key={stat.label}
-                        className="flex items-center gap-3 font-mono text-xs uppercase tracking-[0.16em] text-white/72"
-                      >
-                        <span className="shrink-0">{stat.label}</span>
-                        <span className="h-px flex-1 border-b border-dotted border-white/15" />
-                        <span className="shrink-0 text-right text-white">{stat.value}</span>
-                      </div>
-                    ))}
+                    {aboutStats.map((stat) => {
+                      const rowClassName =
+                        "flex items-center gap-3 font-mono text-xs uppercase tracking-[0.16em] text-white/72";
+
+                      if (stat.href) {
+                        return (
+                          <a
+                            key={stat.label}
+                            href={stat.href}
+                            className={`${rowClassName} transition-colors duration-300 hover:text-bmw-blue`}
+                          >
+                            <span className="shrink-0">{stat.label}</span>
+                            <span className="h-px flex-1 border-b border-dotted border-white/15" />
+                            <span className="shrink-0 text-right text-white">
+                              {stat.value}
+                            </span>
+                          </a>
+                        );
+                      }
+
+                      return (
+                        <div key={stat.label} className={rowClassName}>
+                          <span className="shrink-0">{stat.label}</span>
+                          <span className="h-px flex-1 border-b border-dotted border-white/15" />
+                          <span className="shrink-0 text-right text-white">{stat.value}</span>
+                        </div>
+                      );
+                    })}
                   </div>
 
                   <div>
@@ -69,4 +87,3 @@ export function About() {
     </section>
   );
 }
-
