@@ -65,7 +65,7 @@ export const experienceEntries = [
       "Reduced stale data footprint by 35-40%, cutting storage overhead in high-volume surveillance workflows",
       "Built full-stack internal plugin (Angular + Java Spring Boot) for surveillance ingestion CRUD with pipeline visibility",
       "Designed multi-agent LLM workflow on internal ELIZA platform, orchestrating modular function units (nugget + state machine) to automate surveillance data reconciliation across MS Teams, Email, Confluence",
-      "Refactored legacy Java codebase to SOLID principles; reduced average cyclomatic complexity per module by ~40%",
+      "Built a full-stack ingestion health dashboard using Spring Boot, Oracle DB, and Angular to monitor AI surveillance data pipelines, optimizing query latency from 2.3s to 85ms through DB-side aggregation and caching. Consolidated 5 parallel data sources into a single optimized endpoint, achieving 99% cache hit rate, <50ms response time, and 70% reduction in payload size.",
     ],
   },
   {
